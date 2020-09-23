@@ -1,0 +1,93 @@
+---
+- { repo: prabirshrestha/asyncomplete.vim, if: 0 }
+- { repo: deris/vim-shot-f, if: 0 }
+
+- repo: neoclide/coc.nvim
+  merge: 0
+  trusted: 1
+  rev: release
+
+- repo: cj/vim-styled-components
+  on_ft: [javascript, javascriptreact, typescript, typescriptreact]
+
+- repo: slim-template/vim-slim
+  on_ft: slim
+
+- repo: mg979/vim-visual-multi
+
+- repo: tpope/vim-abolish
+  hook_add: |-
+    nmap <localleader>s :%s/
+    vmap <localleader>s :s/
+
+- repo: alvan/vim-closetag
+  on_ft: [html, xhtml, javascript, javascriptreact, typescript, typescriptreact]
+
+- repo: andrewradev/tagalong.vim
+  on_ft:
+    [
+      html,
+      xml,
+      jsx,
+      eruby,
+      ejs,
+      eco,
+      php,
+      htmldjango,
+      javascriptreact,
+      typescriptreact,
+    ]
+
+- repo: easymotion/vim-easymotion
+  hook_add: |-
+    omap t <plug>(easymotion-bd-tl)
+    vmap t <plug>(easymotion-bd-tl)
+    map f <plug>(easymotion-bd-fl)
+    map f <plug>(easymotion-bd-fl)
+
+    let g:easymotion_smartcase = 1
+    let g:easymotion_use_smartsign_us = 1
+    let g:easymotion_do_shade = 0
+    let g:easymotion_move_highlight = 0
+    let g:easymotion_landing_highlight = 0
+
+    function! s:incsearch_config(...) abort
+      return incsearch#util#deepextend(deepcopy({
+                \   'modules': [incsearch#config#easymotion#module()],
+                \   'keymap': {
+                \     "\<CR>": '<Over>(easymotion)'
+                \   },
+                \   'is_expr': 0,
+                \   'is_stay': 1
+                \ }), get(a:, 1, {}))
+    endfunction
+
+    function! s:config_easyfuzzymotion(...) abort
+      return extend(copy({
+                \   'converters': [incsearch#config#fuzzyword#converter()],
+                \   'modules': [incsearch#config#easymotion#module()],
+                \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+                \   'is_expr': 0,
+                \ }), get(a:, 1, {}))
+    endfunction
+
+    let g:easymotion_prompt = '🔎 '
+
+    noremap <silent><expr> /  incsearch#go(<sid>incsearch_config({'prompt': '🔎 '}))
+
+- repo: haya14busa/vim-easyoperator-phrase
+  depends: vim-easymotion
+- repo: haya14busa/incsearch.vim
+- repo: haya14busa/incsearch-easymotion.vim
+  depends: incsearch.vim
+- repo: haya14busa/incsearch-fuzzy.vim
+  depends: incsearch.vim
+
+- repo: voldikss/vim-floaterm
+
+- repo: moll/vim-bbye
+  merged: 0
+  on_cmd: bdelete
+  hook_add: |-
+    " Kill current buffer
+    noremap <C-x> :Bdelete<CR>

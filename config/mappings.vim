@@ -250,14 +250,14 @@ nmap <silent> <Leader>h
 " ------------
 
 " Terminal
-if exists(':tnoremap')
-	if has('nvim')
-		tnoremap   jj         <C-\><C-n>
-	else
-		tnoremap   <ESC><ESC>  <C-w>N
-		tnoremap   jj          <C-w>N
-	endif
-endif
+" if exists(':tnoremap')
+" 	if has('nvim')
+" 		tnoremap   jj         <C-\><C-n>
+" 	else
+" 		tnoremap   <ESC><ESC>  <C-w>N
+" 		tnoremap   jj          <C-w>N
+" 	endif
+" endif
 
 " Source line and selection in vim
 vnoremap <Leader>S y:execute @@<CR>:echo 'Sourced selection.'<CR>
